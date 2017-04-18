@@ -133,9 +133,9 @@ x = (X) / (X+Y+Z);
 y = (Y)/ (X+Y+Z);
 
 %% Show Gui Values
-handles.xValue.String = double2str(x);
-handles.yValue.String = double2str(y);
-%handles.YValue.String = double2str(Y);
+handles.xValue.String = num2str(x);
+handles.yValue.String = num2str(y);
+%handles.YValue.String = num2str(Y);
 
 %% Display CIE Graph
 

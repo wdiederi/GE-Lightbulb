@@ -87,9 +87,9 @@ y = (Y)/ (X+Y+Z);
 
 disp('The color coordinates for the inputed resistance values are: ');
 disp([ 'x= ', num2str(x), '; y= ', num2str(y),'; Y= ', num2str(Y) ] );
-handles.xValue.String = double2str(x);
-handles.yValue.String = double2str(y);
-handles.YValue.String = double2str(Y);
+handles.xValue.String = num2str(x);
+handles.yValue.String = num2str(y);
+handles.YValue.String = num2str(Y);
 
 %% Plot
 
