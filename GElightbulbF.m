@@ -1,5 +1,5 @@
 function GElightbulbF(handles)
-%% GE_Lightbulb3.m
+%% GElightbulbF.m
 
 % modified April 18, 2017,
 % John changed the initial resistance values
