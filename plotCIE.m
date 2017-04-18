@@ -34,6 +34,7 @@ plot(hax, x, y, 'ko', 'LineWidth', 1.5)
 hold off
 
 %% Plot RGB Color on Seperate Graph
+% THIS SECTION NEEDS TO BE FIXED
 
 % finds the x and y positions relative to the array size
 xpos = round((x / CIE_image.XData(2)) * size(CIE, 1));
@@ -66,35 +67,49 @@ imshow(CIE(xpos, ypos, :), 'InitialMagnification', 'fit', 'Parent', haxCol);
 CIE_image.ButtonDownFcn = @findClick;
 
 % saves 'handles' as user data to the image object
-CIE_image.UserData = handles;
+CIE_image.UserData = struct('handles', handles, 'alphaArray', alphaArray);
 
 
 % callback function goes here
 % this executes when the mouse is clicked on the image
 function findClick(src, ~)
 
-% retrieves 'handles' as saved in user data
-handles = src.UserData;
+% retrieves 'handles' and 'alphaArray' as saved in user data
+handles = src.UserData.handles;
+alphaArray = src.UserData.alphaArray;
 
 % finds the current position of the mouse
 clickPoint = get(handles.axesCIE, 'CurrentPoint');
 xClick = clickPoint(1, 1);  % x coordinate of the mouse click
 yClick = clickPoint(1, 2);  % y coordinate of the mouse click
 
-% sets popup selector to 'Custom' in the GUI
-handles.settingPopup.Value = 1;
+% finds the x and y positions of the click relative to the image
+% THIS NEEDS TO BE UPDATED, SAME AS ABOVE IN THIS FILE
+xpos = round((xClick / .74) * 1014);
+ypos = round(((yClick / .835)) * 894);
 
-% changes x and y sliders and text in the GUI
-handles.xSlider.Value = round(xClick, 2);
-handles.ySlider.Value = round(yClick, 2);
-handles.xValue.String = round(xClick, 2);
-handles.yValue.String = round(yClick, 2);
-
-% redraws the circle on top of the CIE image, using new x and y coordinates
-plot(handles.axesCIE, xClick, yClick, 'ko', 'LineWidth', 1.5)
-
-% reruns the plotCIE function, mostly to update the single color graph...
-plotCIE(handles, xClick, yClick)
+if alphaArray(xpos, ypos) > 0
+    
+    % sets popup selector to 'Custom' in the GUI
+    handles.settingPopup.Value = 1;
+    
+    % changes x and y sliders and text in the GUI
+    handles.xSlider.Value = round(xClick, 2);
+    handles.ySlider.Value = round(yClick, 2);
+    handles.xValue.String = round(xClick, 2);
+    handles.yValue.String = round(yClick, 2);
+    
+    % redraws the circle on top of the CIE image, using new x and y coordinates
+    plot(handles.axesCIE, xClick, yClick, 'ko', 'LineWidth', 1.5)
+    
+    % reruns the plotCIE function, mostly to update the single color graph...
+    plotCIE(handles, xClick, yClick)
+    
+else
+    
+    disp('Invalid Location')
+    
+end
 
 % WE NEED TO IMPLEMENT THE CHANGE OF THE RESISTANCE SLIDERS.
 % CONVERT THE XCLICK AND YCLICK TO RESISTANCE VALUES AND THEN MAKE THE
