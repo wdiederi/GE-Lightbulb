@@ -1,14 +1,9 @@
 function plotCIE(handles, x, y)
 % this function plots an xy value on the CIE spectrum in the GUI
 
-% version 3
-% modified April 11, 2017
-
 % Section 11, Group 3
 
 %% Set Parameters
-
-lineWidth = 1.5;
 
 % read CIE image
 CIE = imread('CIExy1931.png');
@@ -29,13 +24,13 @@ title(hax, 'CIE Display')
 
 % shows image with various options
 CIE_image = imshow(CIE, 'InitialMagnification', 'fit', 'Parent', hax, 'XData', [0, .74], 'YData', [.835, 0]);
-iptsetpref('ImshowAxesVisible', 'on')   % shows the coordinates like any normal axes
+iptsetpref('ImshowAxesVisible', 'off')   % shows the coordinates like any normal axes
 set(hax, 'Ydir', 'Normal')              % resets the orientation of the Y axis
 alpha(hax, alphaArray)   % this selects the portion of the image to keep transparent (invisible)
 hold on
 
 % plots the circle on top of the CIE image
-plot(hax, x, y, 'ko', 'LineWidth', lineWidth)
+plot(hax, x, y, 'ko', 'LineWidth', 1.5)
 hold off
 
 %% Plot RGB Color on Seperate Graph
@@ -45,8 +40,8 @@ xpos = round((x / CIE_image.XData(2)) * size(CIE, 1));
 ypos = round(((y / CIE_image.YData(1))) * size(CIE, 2));
 
 % test display
-clc
-
+disp(' ')
+disp('~ INFO ~')
 disp(['x/width: ', num2str((x / CIE_image.XData(2)))])
 disp(['y/height: ', num2str((y / CIE_image.YData(1)))])
 disp(['x: ', num2str(x)])
@@ -86,12 +81,20 @@ clickPoint = get(handles.axesCIE, 'CurrentPoint');
 xClick = clickPoint(1, 1);  % x coordinate of the mouse click
 yClick = clickPoint(1, 2);  % y coordinate of the mouse click
 
-% redraws the circle on top of the CIE image, using new x and y coordinates
-plotCIE(handles, xClick, yClick)
-
 % sets popup selector to 'Custom' in the GUI
 handles.settingPopup.Value = 1;
 
+% changes x and y sliders and text in the GUI
+handles.xSlider.Value = round(xClick, 2);
+handles.ySlider.Value = round(yClick, 2);
+handles.xValue.String = round(xClick, 2);
+handles.yValue.String = round(yClick, 2);
+
+% redraws the circle on top of the CIE image, using new x and y coordinates
+plot(handles.axesCIE, xClick, yClick, 'ko', 'LineWidth', 1.5)
+
+% reruns the plotCIE function, mostly to update the single color graph...
+plotCIE(handles, xClick, yClick)
 
 % WE NEED TO IMPLEMENT THE CHANGE OF THE RESISTANCE SLIDERS.
 % CONVERT THE XCLICK AND YCLICK TO RESISTANCE VALUES AND THEN MAKE THE

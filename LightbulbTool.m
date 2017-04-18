@@ -33,7 +33,7 @@ function varargout = LightbulbTool(varargin)
 
 % Edit the above text to modify the response to help LightbulbTool
 
-% Last Modified by GUIDE v2.5 18-Apr-2017 18:34:15
+% Last Modified by GUIDE v2.5 18-Apr-2017 18:51:43
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -369,6 +369,14 @@ function xValue_Callback(hObject, eventdata, handles)
 % Hints: get(hObject,'String') returns contents of xValue as text
 %        str2double(get(hObject,'String')) returns contents of xValue as a double
 
+handles.xSlider.Value = round(str2double(handles.xValue.String), 2);
+
+% THIS NEEDS TO EVENTUALLY INCORPORATE THE NONLINEAR SOLVER TO CHANGE THE
+% RESISTANCE VALUES
+plotCIE(handles, handles.xSlider.Value, handles.ySlider.Value)
+
+% I don't think this needs to be here...
+% GElightbulbF(handles)
 
 % --- Executes during object creation, after setting all properties.
 function xValue_CreateFcn(hObject, eventdata, handles)
@@ -381,9 +389,6 @@ function xValue_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
-xstr = handles.xValue.String;
-
-GElightbulbF(handles)
 
 
 function yValue_Callback(hObject, eventdata, handles)
@@ -393,9 +398,15 @@ function yValue_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'String') returns contents of yValue as text
 %        str2double(get(hObject,'String')) returns contents of yValue as a double
-ystr = handles.yValue.String;
 
-GElightbulbF(handles)
+handles.ySlider.Value = round(str2double(handles.yValue.String), 2);
+
+% THIS NEEDS TO EVENTUALLY INCORPORATE THE NONLINEAR SOLVER TO CHANGE THE
+% RESISTANCE VALUES
+plotCIE(handles, handles.xSlider.Value, handles.ySlider.Value)
+
+% I don't think this needs to be here...
+% GElightbulbF(handles)
 
 
 % --- Executes during object creation, after setting all properties.
@@ -431,4 +442,59 @@ function edit8_CreateFcn(hObject, eventdata, handles)
 %       See ISPC and COMPUTER.
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes on slider movement.
+function ySlider_Callback(hObject, eventdata, handles)
+% hObject    handle to ySlider (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'Value') returns position of slider
+%        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
+
+handles.yValue.String = num2str(handles.ySlider.Value);
+
+% THIS NEEDS TO EVENTUALLY INCORPORATE THE NONLINEAR SOLVER TO CHANGE THE
+% RESISTANCE VALUES
+plotCIE(handles, handles.xSlider.Value, handles.ySlider.Value)
+
+% --- Executes during object creation, after setting all properties.
+function ySlider_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to ySlider (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: slider controls usually have a light gray background.
+if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor',[.9 .9 .9]);
+end
+
+
+% --- Executes on slider movement.
+function xSlider_Callback(hObject, eventdata, handles)
+% hObject    handle to xSlider (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'Value') returns position of slider
+%        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
+
+handles.xValue.String = num2str(handles.xSlider.Value);
+
+% THIS NEEDS TO EVENTUALLY INCORPORATE THE NONLINEAR SOLVER TO CHANGE THE
+% RESISTANCE VALUES
+plotCIE(handles, handles.xSlider.Value, handles.ySlider.Value)
+
+
+% --- Executes during object creation, after setting all properties.
+function xSlider_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to xSlider (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: slider controls usually have a light gray background.
+if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor',[.9 .9 .9]);
 end
