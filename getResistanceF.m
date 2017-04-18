@@ -7,7 +7,7 @@ function getResistanceF(x, y, Y, Xval,Yval,Zval)
 
 %% Define some variables
 
-Ans{1}.color = 'Yellow';
+Ans{1}.color = 'Red';
 Ans{2}.color = 'Green';
 Ans{3}.color = 'Blue';
 Ans{4}.color = 'White';
