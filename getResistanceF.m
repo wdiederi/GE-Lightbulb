@@ -1,5 +1,6 @@
 function getResistanceF(x, y, Y, Xval,Yval,Zval)
 % Section 11 - Group 3
+% TESTING
 % Input the desired x,y,Y values and the Xval,Yval, and Zval info which
 % should all be standard for any current supplied
 
