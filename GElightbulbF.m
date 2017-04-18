@@ -15,6 +15,7 @@ function GElightbulbF(handles)
 % Or we can just get rid of the integration altogether, but I think we
 % should do it once in the code just so they see how it was done.
 
+clc;
 %% read GE tables
 powerData = xlsread('GE_Lighting_AlignProjectData', 'LED Spectra');
 colorMatchData = xlsread('GE_Lighting_AlignProjectData', 'Color Matching Functions');
@@ -69,8 +70,8 @@ for iLED = 1:4
     %Resistance Value Variables::::
     LED{iLED}.var = LED{iLED}.current/.7;
 
-    disp(['Current supplied to LED:',LED{iLED}.color,' is ',...
-       num2str( LED{iLED}.current ), ' amps.' ]);
+    %disp(['Current supplied to LED:',LED{iLED}.color,' is ',...
+    %  num2str( LED{iLED}.current ), ' amps.' ]);
 end
 
 %% Compute XYZ color space Coordinates

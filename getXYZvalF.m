@@ -67,9 +67,9 @@ for iLED = 1:4
     %}
     
     %% Sum the color fxn
-    Xtotal(iLed) = Xval(iLed) *   LED{iLed}.var    ;
-    Ytotal(iLed) = Yval(iLed) *   LED{iLed}.var    ;
-    Ztotal(iLed) = Zval(iLed) *   LED{iLed}.var    ;
+    Xtotal(iLED) = Xval(iLED) *   LED{iLED}.var    ;
+    Ytotal(iLED) = Yval(iLED) *   LED{iLED}.var    ;
+    Ztotal(iLED) = Zval(iLED) *   LED{iLED}.var    ;
 end
 
 %% Compute color coordinates X Y Z

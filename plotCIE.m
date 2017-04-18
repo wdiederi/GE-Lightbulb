@@ -45,8 +45,8 @@ xpos = round((x / CIE_image.XData(2)) * size(CIE, 1));
 ypos = round(((y / CIE_image.YData(1))) * size(CIE, 2));
 
 % test display
-clc
-
+%clc
+%{
 disp(['x/width: ', num2str((x / CIE_image.XData(2)))])
 disp(['y/height: ', num2str((y / CIE_image.YData(1)))])
 disp(['x: ', num2str(x)])
@@ -55,7 +55,7 @@ disp(['xpos: ', num2str(xpos)])
 disp(['ypos: ', num2str(ypos)])
 disp(['size(CIE): ', num2str(size(CIE))])
 disp(['RGB: ', num2str(CIE(xpos, ypos, :))])
-
+%}
 
 % selects the coreect axes on the GUI
 axes(handles.axesColor)

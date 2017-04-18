@@ -97,8 +97,7 @@ function redSlider_Callback(hObject, eventdata, handles)
 handles.settingPopup.Value = 3;
 resR = handles.redSlider.Value;
 handles.redText.String = num2str(round(resR, 2));
-GElightbulbF(handles);
-
+getXYZvalF(handles);
 
 
 % --- Executes during object creation, after setting all properties.
@@ -124,7 +123,7 @@ function greenSlider_Callback(hObject, eventdata, handles)
 handles.settingPopup.Value = 3;
 resG = handles.greenSlider.Value;
 handles.greenText.String = num2str(round(resG, 2));
-GElightbulbF(handles);
+getXYZvalF(handles);
 
 % --- Executes during object creation, after setting all properties.
 function greenSlider_CreateFcn(hObject, eventdata, handles)
@@ -149,7 +148,7 @@ function blueSlider_Callback(hObject, eventdata, handles)
 handles.settingPopup.Value = 3;
 resB = handles.blueSlider.Value;
 handles.blueText.String = num2str(round(resB, 2));
-GElightbulbF(handles);
+getXYZvalF(handles);
 
 % --- Executes during object creation, after setting all properties.
 function blueSlider_CreateFcn(hObject, eventdata, handles)
@@ -174,7 +173,7 @@ function whiteSlider_Callback(hObject, eventdata, handles)
 handles.settingPopup.Value = 3;
 resW = handles.whiteSlider.Value;
 handles.whiteText.String = num2str(round(resW, 2));
-GElightbulbF(handles)
+getXYZvalF(handles);
 
 % --- Executes during object creation, after setting all properties.
 function whiteSlider_CreateFcn(hObject, eventdata, handles)
@@ -223,7 +222,7 @@ switch handles.settingPopup.Value
            
 end
 
-GElightbulbF(handles)
+getXYZvalF(handles);
 
 % --- Executes during object creation, after setting all properties.
 function settingPopup_CreateFcn(hObject, eventdata, handles)
@@ -243,7 +242,7 @@ function buttonCalculate_Callback(hObject, eventdata, handles)
 % hObject    handle to buttonCalculate (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-GElightbulbF(handles)
+getXYZvalF(handles);
 
 % --- Executes on button press in checkbox1.
 function checkbox1_Callback(hObject, eventdata, handles)
@@ -252,7 +251,7 @@ function checkbox1_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % Hint: get(hObject,'Value') returns toggle state of checkbox1
-GElightbulbF(handles)
+getXYZvalF(handles);
 
 
 function redText_Callback(hObject, eventdata, handles)
@@ -265,7 +264,7 @@ function redText_Callback(hObject, eventdata, handles)
 handles.settingPopup.Value = 1;
 resRstr = handles.redText.String;
 handles.redSlider.Value = str2double(round(resRstr, 2));
-GElightbulbF(handles)
+getXYZvalF(handles);
 
 
 % --- Executes during object creation, after setting all properties.
@@ -292,7 +291,7 @@ function greenText_Callback(hObject, eventdata, handles)
 handles.settingPopup.Value = 1;
 resGstr = handles.greenText.String;
 handles.greenSlider.Value = str2double(round(resGstr, 2));
-GElightbulbF(handles)
+getXYZvalF(handles);
 
 % --- Executes during object creation, after setting all properties.
 function greenText_CreateFcn(hObject, eventdata, handles)
@@ -318,7 +317,7 @@ function whiteText_Callback(hObject, eventdata, handles)
 handles.settingPopup.Value = 1;
 resWstr = handles.whiteText.String;
 handles.whiteSlider.Value = str2double(round(resWstr, 2));
-GElightbulbF(handles)
+getXYZvalF(handles);
 
 % --- Executes during object creation, after setting all properties.
 function whiteText_CreateFcn(hObject, eventdata, handles)
@@ -344,7 +343,7 @@ function blueText_Callback(hObject, eventdata, handles)
 handles.settingPopup.Value = 1;
 resBstr = handles.blueText.String;
 handles.blueSlider.Value = str2double(round(resBstr, 2));
-GElightbulbF(handles)
+getXYZvalF(handles);
 
 % --- Executes during object creation, after setting all properties.
 function blueText_CreateFcn(hObject, eventdata, handles)
