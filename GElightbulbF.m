@@ -138,4 +138,4 @@ y = (Y)/ (X+Y+Z);
 disp('The color coordinates for the inputed resistance values are: ');
 disp([ 'x= ', num2str(x), '; y= ', num2str(y),'; Y= ', num2str(Y) ] );
 
-plotCIE(handles, x, y)
+plotCIE(handles, x, y);

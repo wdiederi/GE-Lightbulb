@@ -30,6 +30,12 @@ LED{2}.resistance = handles.greenSlider.Value; %green
 LED{3}.resistance = handles.blueSlider.Value; %blue
 LED{4}.resistance = handles.whiteSlider.Value; %white
 
+%Add initial values of resistance
+LED{1}.resistance = LED{1}.resistance + 200;
+LED{2}.resistance = LED{2}.resistance +100;
+LED{3}.resistance = LED{3}.resistance +100;
+LED{4}.resistance = LED{4}.resistance +100;
+
  
  %% Ohm's Law
 vSupply = 24; %The voltage of the power sourc
@@ -84,5 +90,9 @@ disp([ 'x= ', num2str(x), '; y= ', num2str(y),'; Y= ', num2str(Y) ] );
 handles.xValue.String = double2str(x);
 handles.yValue.String = double2str(y);
 handles.YValue.String = double2str(Y);
+
+%% Plot
+
+plotCIE(handles, x, y);
 
 end
