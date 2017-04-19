@@ -1,6 +1,6 @@
 function varargout = LightbulbTool(varargin)
 
-%TEST
+%THIS IS A TEST.  4/18/17 @ 8:28
 % UPDATE LAST MODIFIED
 % modified April 18 2018 by Danny
 % Made the switch statment update the the string values for the edit text
