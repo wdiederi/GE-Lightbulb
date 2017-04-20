@@ -1,8 +1,9 @@
 function getXYZvalF(handles)
 %Created 4/11/2017 by John
 %% Last modified 
-    %4/11/2017 by John
-    %-Created the fxn
+    %4/18/2017 by John
+    %-added native resistance
+    % added call to plot
 %% PURPOSE:
 %Allow you to solve for the xyY values w/o having to do the integration
 %% NEED:
@@ -19,7 +20,6 @@ function getXYZvalF(handles)
 Xval = [1.9318,  0.2192,  1.2017,  1.1688];
 Yval = [0.8465,  1.0417,  0.1895,  1.1652];
 Zval = [0.0003,  0.2143,  6.4264,  0.7231];
-
 Xtotal = zeros(1,4);
 Ytotal = zeros(1,4);
 Ztotal = zeros(1,4);
@@ -31,12 +31,12 @@ LED{2}.resistance = handles.greenSlider.Value; %green
 LED{3}.resistance = handles.blueSlider.Value; %blue
 LED{4}.resistance = handles.whiteSlider.Value; %white
 
-%Add initial values of resistance
-LED{1}.resistance = LED{1}.resistance + 200;
+% Add the native resistance in the circuit
+
+LED{1}.resistance = LED{1}.resistance +200;
 LED{2}.resistance = LED{2}.resistance +100;
 LED{3}.resistance = LED{3}.resistance +100;
 LED{4}.resistance = LED{4}.resistance +100;
-
  
  %% Ohm's Law
 vSupply = 24; %The voltage of the power sourc
@@ -96,4 +96,6 @@ handles.YValue.String = num2str(Y);
 
 plotCIE(handles, x, y);
 
+%% Plot
+plotCIE(handles, x, y)
 end

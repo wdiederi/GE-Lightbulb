@@ -3,8 +3,9 @@ function varargout = LightbulbTool(varargin)
 % TESTING  4/18/17 @ 8:28
 % UPDATE LAST MODIFIED
 % modified April 18 2018 by Danny
-% Made the switch statment update the the string values for the edit text
-% boxes
+% Changed the string values for the AM and PM setting to have only 2
+% decimals. Also began to make the xValue and yValue talk, but did not
+% finish.
 
 % WE NEED TO ADD PM RESISTANCE VALUES TO THE "settingPopup" CALLBACK
 
@@ -32,7 +33,7 @@ function varargout = LightbulbTool(varargin)
 
 % Edit the above text to modify the response to help LightbulbTool
 
-% Last Modified by GUIDE v2.5 12-Apr-2017 16:59:09
+% Last Modified by GUIDE v2.5 18-Apr-2017 18:51:43
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -203,10 +204,10 @@ switch handles.settingPopup.Value
         handles.greenSlider.Value = 9.9533;
         handles.blueSlider.Value = 36.5713;
         handles.whiteSlider.Value = 23.724;
-        handles.redText.String = 46.8667;
-        handles.greenText.String = 9.9533;
-        handles.blueText.String = 36.5713;
-        handles.whiteText.String = 23.724;
+        handles.redText.String = 46.86;
+        handles.greenText.String = 9.95;
+        handles.blueText.String = 36.57;
+        handles.whiteText.String = 23.72;
     case 2 % PM SETTING
         % THESE VALUES ARE NOT CORRECT
         % JUST ARBITRARY VALUES SO THE PROGRAM RUNS
@@ -215,10 +216,10 @@ switch handles.settingPopup.Value
         handles.greenSlider.Value = 9.9533;
         handles.blueSlider.Value = 36.5713;
         handles.whiteSlider.Value = 23.724;
-        handles.redText.String = 46.8667;
-        handles.greenText.String = 9.9533;
-        handles.blueText.String = 36.5713;
-        handles.whiteText.String = 23.724;
+        handles.redText.String = 46.87;
+        handles.greenText.String = 9.95;
+        handles.blueText.String = 36.57;
+        handles.whiteText.String = 23.72;
            
 end
 
@@ -367,6 +368,14 @@ function xValue_Callback(hObject, eventdata, handles)
 % Hints: get(hObject,'String') returns contents of xValue as text
 %        str2double(get(hObject,'String')) returns contents of xValue as a double
 
+handles.xSlider.Value = round(str2double(handles.xValue.String), 2);
+
+% THIS NEEDS TO EVENTUALLY INCORPORATE THE NONLINEAR SOLVER TO CHANGE THE
+% RESISTANCE VALUES
+plotCIE(handles, handles.xSlider.Value, handles.ySlider.Value)
+
+% I don't think this needs to be here...
+% GElightbulbF(handles)
 
 % --- Executes during object creation, after setting all properties.
 function xValue_CreateFcn(hObject, eventdata, handles)
@@ -381,7 +390,6 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 
 
-
 function yValue_Callback(hObject, eventdata, handles)
 % hObject    handle to yValue (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -389,6 +397,15 @@ function yValue_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'String') returns contents of yValue as text
 %        str2double(get(hObject,'String')) returns contents of yValue as a double
+
+handles.ySlider.Value = round(str2double(handles.yValue.String), 2);
+
+% THIS NEEDS TO EVENTUALLY INCORPORATE THE NONLINEAR SOLVER TO CHANGE THE
+% RESISTANCE VALUES
+plotCIE(handles, handles.xSlider.Value, handles.ySlider.Value)
+
+% I don't think this needs to be here...
+% GElightbulbF(handles)
 
 
 % --- Executes during object creation, after setting all properties.
@@ -424,4 +441,59 @@ function edit8_CreateFcn(hObject, eventdata, handles)
 %       See ISPC and COMPUTER.
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes on slider movement.
+function ySlider_Callback(hObject, eventdata, handles)
+% hObject    handle to ySlider (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'Value') returns position of slider
+%        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
+
+handles.yValue.String = num2str(handles.ySlider.Value);
+
+% THIS NEEDS TO EVENTUALLY INCORPORATE THE NONLINEAR SOLVER TO CHANGE THE
+% RESISTANCE VALUES
+plotCIE(handles, handles.xSlider.Value, handles.ySlider.Value)
+
+% --- Executes during object creation, after setting all properties.
+function ySlider_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to ySlider (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: slider controls usually have a light gray background.
+if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor',[.9 .9 .9]);
+end
+
+
+% --- Executes on slider movement.
+function xSlider_Callback(hObject, eventdata, handles)
+% hObject    handle to xSlider (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'Value') returns position of slider
+%        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
+
+handles.xValue.String = num2str(handles.xSlider.Value);
+
+% THIS NEEDS TO EVENTUALLY INCORPORATE THE NONLINEAR SOLVER TO CHANGE THE
+% RESISTANCE VALUES
+plotCIE(handles, handles.xSlider.Value, handles.ySlider.Value)
+
+
+% --- Executes during object creation, after setting all properties.
+function xSlider_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to xSlider (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: slider controls usually have a light gray background.
+if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor',[.9 .9 .9]);
 end
