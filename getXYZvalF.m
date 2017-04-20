@@ -19,6 +19,7 @@ function getXYZvalF(handles)
 Xval = [1.9318,  0.2192,  1.2017,  1.1688];
 Yval = [0.8465,  1.0417,  0.1895,  1.1652];
 Zval = [0.0003,  0.2143,  6.4264,  0.7231];
+
 Xtotal = zeros(1,4);
 Ytotal = zeros(1,4);
 Ztotal = zeros(1,4);
