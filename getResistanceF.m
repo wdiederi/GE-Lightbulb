@@ -3,7 +3,7 @@ function getResistanceF(x, y, Y, Xval,Yval,Zval)
 % TESTING
 % Input the desired x,y,Y values and the Xval,Yval, and Zval info which
 % should all be standard for any current supplied
-
+% I'm making a change to make sure this works testing again
 % Returns the resistances needed to produce those values
 
 %% Define some variables
