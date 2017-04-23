@@ -122,9 +122,7 @@ if colorValue > 0
     
     % shows image with various options
     imshow(CIE(ypos, xpos, :), 'InitialMagnification', 'fit', 'Parent', handles.axesColor);
-    
-    %plotCIE(handles, xClick, yClick)
-    
+        
 else
     
     disp('Invalid Location')
