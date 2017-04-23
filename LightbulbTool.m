@@ -264,7 +264,7 @@ function redText_Callback(hObject, eventdata, handles)
 %        str2double(get(hObject,'String')) returns contents of redText as a double
 handles.settingPopup.Value = 1;
 resRstr = handles.redText.String;
-handles.redSlider.Value = str2double(round(resRstr, 2));
+handles.redSlider.Value = round(str2double(resRstr), 2);
 getXYZvalF(handles);
 
 
@@ -291,7 +291,7 @@ function greenText_Callback(hObject, eventdata, handles)
 %        str2double(get(hObject,'String')) returns contents of greenText as a double
 handles.settingPopup.Value = 1;
 resGstr = handles.greenText.String;
-handles.greenSlider.Value = str2double(round(resGstr, 2));
+handles.greenSlider.Value = round(str2double(resGstr), 2);
 getXYZvalF(handles);
 
 % --- Executes during object creation, after setting all properties.
@@ -317,7 +317,7 @@ function whiteText_Callback(hObject, eventdata, handles)
 %        str2double(get(hObject,'String')) returns contents of whiteText as a double
 handles.settingPopup.Value = 1;
 resWstr = handles.whiteText.String;
-handles.whiteSlider.Value = str2double(round(resWstr, 2));
+handles.whiteSlider.Value = round(str2double(resWstr), 2);
 getXYZvalF(handles);
 
 % --- Executes during object creation, after setting all properties.
@@ -343,7 +343,7 @@ function blueText_Callback(hObject, eventdata, handles)
 %        str2double(get(hObject,'String')) returns contents of blueText as a double
 handles.settingPopup.Value = 1;
 resBstr = handles.blueText.String;
-handles.blueSlider.Value = str2double(round(resBstr, 2));
+handles.blueSlider.Value = round(str2double(resBstr), 2);
 getXYZvalF(handles);
 
 % --- Executes during object creation, after setting all properties.
