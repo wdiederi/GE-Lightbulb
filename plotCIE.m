@@ -29,7 +29,7 @@ alpha(hax, alphaArray)   % this selects the portion of the image to keep transpa
 hold on
 
 % plots the circle on top of the CIE image
-plot(hax, x, y, 'ko', 'LineWidth', 1.5)
+hDot = plot(hax, x, y, 'ko', 'LineWidth', 1.5);
 hold on
 
 %% Plot RGB Color on Seperate Graph
@@ -66,7 +66,7 @@ imshow(CIE(ypos, xpos, :), 'InitialMagnification', 'fit', 'Parent', haxCol);
 CIE_image.ButtonDownFcn = @findClick;
 
 % saves 'handles' as user data to the image object
-CIE_image.UserData = struct('handles', handles, 'alphaArray', alphaArray, 'CIE', CIE);
+CIE_image.UserData = struct('handles', handles, 'alphaArray', alphaArray, 'CIE', CIE, 'hDot', hDot);
 
 
 % callback function goes here
@@ -77,6 +77,7 @@ function findClick(src, ~)
 handles = src.UserData.handles;
 alphaArray = src.UserData.alphaArray;
 CIE = src.UserData.CIE;
+hDot = src.UserData.hDot;
 
 % finds the current position of the mouse
 clickPoint = get(handles.axesCIE, 'CurrentPoint');
@@ -110,7 +111,19 @@ if colorValue > 0
     handles.xValue.String = round(xClick, 2);
     handles.yValue.String = round(yClick, 2);
     
-    plotCIE(handles, xClick, yClick)
+    % update the plot to redraw the locator circle
+    delete(hDot)
+    hDot = plot(handles.axesCIE, xClick, yClick, 'ko', 'LineWidth', 1.5);
+    src.UserData.hDot = hDot;
+    
+    % update the single-color plot...
+    % selects the correct axes on the GUI
+    axes(handles.axesColor)
+    
+    % shows image with various options
+    imshow(CIE(ypos, xpos, :), 'InitialMagnification', 'fit', 'Parent', handles.axesColor);
+    
+    %plotCIE(handles, xClick, yClick)
     
 else
     
