@@ -1,10 +1,24 @@
-function getResistanceF(x, y, Y)
-% Section 11 - Group 3
-% Changed 4/24
-% Input the desired x,y,Y values and the Xval,Yval, and Zval info which
-% should all be standard for any current supplied
+function getResistanceF(handles, xtest, ytest, Ytest)
+%Last Modified 4/24
+% Takes the x, y, Y values and outputs the needed current values. to get as
+% close as possible to the Y value after getting the x, and y.
+%
+% Will also only take the x, and y values, and then prioritize the highest
+% Y value.
+%
 
-% Returns the resistances needed to produce those values
+%% Accept multiple input types
+if nargin<4 % less than 4 if using from gui
+    Ytest = 3;
+end
+
+%{
+Define values of handles =
+  = xtest;
+  = ytest;
+  = Ytest;
+
+%}
 
 %% AM
 %{
@@ -26,63 +40,90 @@ Zval = [0.0003,  0.2143,  6.4264,  0.7231];
 
 %% Define some variables
 
-Ans{1}.color = 'Red';
-Ans{2}.color = 'Green';
-Ans{3}.color = 'Blue';
-Ans{4}.color = 'White';
-
-%% Solve;
-
-
-% XYZ of the AM bulb
-   %CHANGE THESE TEST VALUES ARE THE DESIRED XYZ VALUES
-Xtest = (x/y) * Y;
-Ytest = Y;
-Ztest = (Y/y)*(1-x-y);
-
-%disp(Xval(1) * LED{1}.var + Xval(2) * LED{2}.var + Xval(3) * LED{3}.var + Xval(4) * LED{4}.var);
-
-    %%Define fxns for fsolve
-    %% Non linear solver 1
-%{
-myfun = @(var)  [Xtest - (Xval(1)*var(1) + Xval(2)*var(2) + Xval(3)*var(3) + Xval(4)*var(4));
-    Ytest - (Yval(1)*var(1) + Yval(2)*var(2) + Yval(3)*var(3) + Yval(4)*var(4));
-    Ztest - (Zval(1)*var(1) + Zval(2)*var(2) + Zval(3)*var(3) + Zval(4)*var(4))];  
-
-xnot = [1,1,1,1];
-
-
-[Results,Fvalues] = fsolve(myfun,xnot);
-%}
-    
-    %% Non Linear Solver 2
-% Upper and lower bounds  for built in resistances of 0-1000
-
-%{/
-%Red = .0125 - .075 
-%Green = .0055 - .06
-%Blue/White = .007 - .077
-
-% Upper and Lower bounds for no built in resistance .001 - 1000
-%Red = .015 - 15000 
-%Green = .006 - 6000
-%Blue/White = .0077 - 7714.3
+LEDans{1}.color = 'Red';
+LEDans{2}.color = 'Green';
+LEDans{3}.color = 'Blue';
+LEDans{4}.color = 'White';
 
 
 
-C = [Xval; Yval; Zval];
-D = [Xtest;Ytest;Ztest];
+%% Loop through different Y values to find x and y vals which are relatively close
+
+C = [Xval; Yval; Zval]; % Used in later calculations
 options.Algorithm = 'interior-point';
-Results = lsqlin(C,D,[],[],[],[],[0;0;0;0],[.075;.06;.077;.077],[],options);
+options.Display = 'none';  % Used with the linear solver
 
-%}
+wh = waitbar(0,'Percentage of Y values tested');
+Yrange = 0:.0001:Ytest;
+numAnswers =0;
+for iY = 1:length(Yrange)
+    waitbar(iY/length(Yrange),wh);
+    
+    
+    % Convert xyY to XYZ
+    Xtest = (xtest/ytest) * Yrange(iY);
+    Ztest = (Yrange(iY)/ytest)*(1-xtest-ytest);
+    
+    D = [Xtest; Yrange(iY) ;Ztest]; % Switches out the desired Y value
+    
+    Results = lsqlin(C,D,[],[],[],[],[0;0;0;0],[.075;.06;.077;.077],[],options);
+    
+    newXYZ = C*Results;
+    newx = newXYZ(1)/(sum(newXYZ));  % Put the found answers back into the eqn.
+    newy = newXYZ(2)/(sum(newXYZ));  % Then convert the XYZ into xyY
+    
+    
+    
+    % Test to see if the result is relatively close
+    
+    if abs(xtest-newx) <.0001 && abs(ytest-newy) <.0001
+        %.0001 is the limit for how close it should be.
+        
+        %disp([ 'x= ', num2str(newx), '; y= ', num2str(newy),'; Y= ', num2str(Y(iY)) ]);
+        %disp(Results);
+        numAnswers = numAnswers+1;
+        %disp(numAnswers);
+        answers{numAnswers,1} = xtest; 
+        answers{numAnswers,2} = ytest;
+        answers{numAnswers,3} = Yrange(iY);
+        answers{numAnswers,4} = Results; %Stores the succesful values of Y
+    
+    end
+    
+    %disp(newx);
+end
+close(wh);
 
-% Results = [R, G, B, W]
-disp(Results);
-Ans{1}.current = Results(1)*.7;
-Ans{2}.current = Results(2)*.7;
-Ans{3}.current = Results(3)*.7;
-Ans{4}.current = Results(4)*.7;
+AnswersYvalues = cell2mat(answers(:,3));
+%Answers(3) has the valid values of Y
+AnswerError = abs( AnswersYvalues -Ytest);  % converts the array into one that just continues the difference
+for it = 1: length(AnswersYvalues)
+    if AnswerError(it) == min(AnswerError) % Tests to see if it is the one with the closest Y value
+        itCorrect = it;
+    end
+end
+%disp(['The closest Y value is ', num2str(Y(itCorrect))]);
+
+xcorrect = answers{itCorrect,1};
+ycorrect = answers{itCorrect,2};
+Ycorrect = answers{itCorrect,3};
+ResultsCorrect = answers{itCorrect, 4};
+
+disp([ 'x= ', num2str(xcorrect), '; y= ', num2str(ycorrect),'; Y= ', num2str(Ycorrect) ]);
+
+
+
+
+
+
+%% Convert the corresponding Results vector into resistance
+% the results vector houses the correct proportions of current that each
+% Led should receive
+
+LEDans{1}.current = ResultsCorrect(1)*.7;
+LEDans{2}.current = ResultsCorrect(2)*.7;
+LEDans{3}.current = ResultsCorrect(3)*.7;
+LEDans{4}.current = ResultsCorrect(4)*.7;
 
 
 %% Reverse Ohm's Law
@@ -103,23 +144,24 @@ for iLED = 1:4
             vLed = 24;
     end
     
-    Ans{iLED}.resistance = (vSupply - vLed)/ Ans{iLED}.current;
+    LEDans{iLED}.resistance = (vSupply - vLed)/ LEDans{iLED}.current;
     
     
 end
 
 %% Built in resistance
-%{/
 
-Ans{1}.resistance = Ans{1}.resistance - 200;
-Ans{2}.resistance = Ans{2}.resistance -100;
-Ans{3}.resistance = Ans{3}.resistance -100;
-Ans{4}.resistance = Ans{4}.resistance -100;
-%}
+
+LEDans{1}.resistance = LEDans{1}.resistance - 200;
+LEDans{2}.resistance = LEDans{2}.resistance -100;
+LEDans{3}.resistance = LEDans{3}.resistance -100;
+LEDans{4}.resistance = LEDans{4}.resistance -100;
+
 
 for iLED = 1:4
     
-    disp(['Resistance that should be supplied to LED:',Ans{iLED}.color,' is ',...
-       num2str( Ans{iLED}.resistance ), ' ohms.' ]);
+    disp(['Resistance that should be supplied to LED:',LEDans{iLED}.color,' is ',...
+       num2str( LEDans{iLED}.resistance ), ' ohms.' ]);
 end
-%resistances = [Ans.resistance{1}, Ans.resistance{2}, Ans.resistance{3}, Ans.resistance{4}];
+
+
