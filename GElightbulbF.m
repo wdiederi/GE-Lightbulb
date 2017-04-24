@@ -133,14 +133,10 @@ Z = sum(Ztotal);
 x = (X) / (X+Y+Z);
 y = (Y)/ (X+Y+Z);
 
+% initialize CIE spectrum through plotCIE
+plotCIE(handles, x, y);
+
 %% Show Gui Values
 handles.xValue.String = num2str(x);
 handles.yValue.String = num2str(y);
-%handles.YValue.String = num2str(Y);
-
-%% Display CIE Graph
-
-disp('The color coordinates for the inputed resistance values are: ');
-disp([ 'x= ', num2str(x), '; y= ', num2str(y),'; Y= ', num2str(Y) ] );
-
-plotCIE(handles, x, y);
+handles.YValue.String = num2str(Y);
