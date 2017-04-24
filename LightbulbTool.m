@@ -208,6 +208,9 @@ switch handles.settingPopup.Value
         handles.greenText.String = 9.95;
         handles.blueText.String = 36.57;
         handles.whiteText.String = 23.72;
+        % WE NEED TO UPDATE THE GRAPH AS WELL
+        
+        
     case 2 % PM SETTING
         % THESE VALUES ARE NOT CORRECT
         % JUST ARBITRARY VALUES SO THE PROGRAM RUNS
@@ -220,7 +223,8 @@ switch handles.settingPopup.Value
         handles.greenText.String = 9.95;
         handles.blueText.String = 36.57;
         handles.whiteText.String = 23.72;
-           
+        % WE NEED TO UPDATE THE GRAPH AS WELL
+        
 end
 
 getXYZvalF(handles);
@@ -262,7 +266,7 @@ function redText_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'String') returns contents of redText as text
 %        str2double(get(hObject,'String')) returns contents of redText as a double
-handles.settingPopup.Value = 1;
+handles.settingPopup.Value = 3;
 resRstr = handles.redText.String;
 handles.redSlider.Value = round(str2double(resRstr), 2);
 getXYZvalF(handles);
@@ -289,7 +293,7 @@ function greenText_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'String') returns contents of greenText as text
 %        str2double(get(hObject,'String')) returns contents of greenText as a double
-handles.settingPopup.Value = 1;
+handles.settingPopup.Value = 3;
 resGstr = handles.greenText.String;
 handles.greenSlider.Value = round(str2double(resGstr), 2);
 getXYZvalF(handles);
@@ -315,7 +319,7 @@ function whiteText_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'String') returns contents of whiteText as text
 %        str2double(get(hObject,'String')) returns contents of whiteText as a double
-handles.settingPopup.Value = 1;
+handles.settingPopup.Value = 3;
 resWstr = handles.whiteText.String;
 handles.whiteSlider.Value = round(str2double(resWstr), 2);
 getXYZvalF(handles);
@@ -341,7 +345,7 @@ function blueText_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'String') returns contents of blueText as text
 %        str2double(get(hObject,'String')) returns contents of blueText as a double
-handles.settingPopup.Value = 1;
+handles.settingPopup.Value = 3;
 resBstr = handles.blueText.String;
 handles.blueSlider.Value = round(str2double(resBstr), 2);
 getXYZvalF(handles);
@@ -368,14 +372,14 @@ function xValue_Callback(hObject, eventdata, handles)
 % Hints: get(hObject,'String') returns contents of xValue as text
 %        str2double(get(hObject,'String')) returns contents of xValue as a double
 
+handles.settingPopup.Value = 3;
 handles.xSlider.Value = round(str2double(handles.xValue.String), 2);
 
 % THIS NEEDS TO EVENTUALLY INCORPORATE THE NONLINEAR SOLVER TO CHANGE THE
 % RESISTANCE VALUES
 plotCIE(handles, handles.xSlider.Value, handles.ySlider.Value)
 
-% I don't think this needs to be here...
-% GElightbulbF(handles)
+
 
 % --- Executes during object creation, after setting all properties.
 function xValue_CreateFcn(hObject, eventdata, handles)
@@ -398,14 +402,13 @@ function yValue_Callback(hObject, eventdata, handles)
 % Hints: get(hObject,'String') returns contents of yValue as text
 %        str2double(get(hObject,'String')) returns contents of yValue as a double
 
+handles.settingPopup.Value = 3;
 handles.ySlider.Value = round(str2double(handles.yValue.String), 2);
 
 % THIS NEEDS TO EVENTUALLY INCORPORATE THE NONLINEAR SOLVER TO CHANGE THE
 % RESISTANCE VALUES
 plotCIE(handles, handles.xSlider.Value, handles.ySlider.Value)
 
-% I don't think this needs to be here...
-% GElightbulbF(handles)
 
 
 % --- Executes during object creation, after setting all properties.
@@ -453,6 +456,7 @@ function ySlider_Callback(hObject, eventdata, handles)
 % Hints: get(hObject,'Value') returns position of slider
 %        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
 
+handles.settingPopup.Value = 3;
 handles.yValue.String = num2str(handles.ySlider.Value);
 
 % THIS NEEDS TO EVENTUALLY INCORPORATE THE NONLINEAR SOLVER TO CHANGE THE
@@ -480,6 +484,7 @@ function xSlider_Callback(hObject, eventdata, handles)
 % Hints: get(hObject,'Value') returns position of slider
 %        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
 
+handles.settingPopup.Value = 3;
 handles.xValue.String = num2str(handles.xSlider.Value);
 
 % THIS NEEDS TO EVENTUALLY INCORPORATE THE NONLINEAR SOLVER TO CHANGE THE

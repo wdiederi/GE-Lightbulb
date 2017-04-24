@@ -17,7 +17,7 @@ alphaArray = CIE(:, :, 1) + CIE(:, :, 2) + CIE(:, :, 3);
 
 %% Plot Original CIE Image
 
-% selects the coreect axes on the GUI
+% selects the correct axes on the GUI
 axes(handles.axesCIE)
 hax = handles.axesCIE;      % saves handles of current axes
 
@@ -28,7 +28,7 @@ set(hax, 'Ydir', 'Normal')              % resets the orientation of the Y axis c
 alpha(hax, alphaArray)   % this selects the portion of the image to keep transparent (invisible)
 hold on
 
-% plots the circle on top of the CIE image
+% plots the circle on top of the CIE image and saves handles
 hDot = plot(hax, x, y, 'ko', 'LineWidth', 1.5);
 hold on
 
@@ -84,6 +84,7 @@ clickPoint = get(handles.axesCIE, 'CurrentPoint');
 xClick = clickPoint(1, 1);  % x coordinate of the mouse click
 yClick = clickPoint(1, 2);  % y coordinate of the mouse click
 
+% SOMETHING HERE NEEDS TO BE FIXED
 % finds the x and y positions of the click relative to the image
 xpos = round((xClick / .74) * 1014);
 ypos = round((1 - yClick / .835) * 894);
@@ -103,7 +104,7 @@ disp(['CIE(ypos, xpos): ', num2str(CIE(ypos, xpos, :))])
 if colorValue > 0
     
     % sets popup selector to 'Custom' in the GUI
-    handles.settingPopup.Value = 1;
+    handles.settingPopup.Value = 3;
     
     % changes x and y sliders and text in the GUI
     handles.xSlider.Value = round(xClick, 2);
@@ -122,12 +123,15 @@ if colorValue > 0
     
     % shows image with various options
     imshow(CIE(ypos, xpos, :), 'InitialMagnification', 'fit', 'Parent', handles.axesColor);
-        
+    
+    % HERE, ADD FUNCTIONALITY WITH THE NONLINEAR SOLVER
+    
 else
     
     disp('Invalid Location')
     
 end
+
 
 % WE NEED TO IMPLEMENT THE CHANGE OF THE RESISTANCE SLIDERS.
 % CONVERT THE XCLICK AND YCLICK TO RESISTANCE VALUES AND THEN MAKE THE
