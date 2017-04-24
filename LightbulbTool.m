@@ -377,7 +377,7 @@ handles.xSlider.Value = round(str2double(handles.xValue.String), 2);
 
 % THIS NEEDS TO EVENTUALLY INCORPORATE THE NONLINEAR SOLVER TO CHANGE THE
 % RESISTANCE VALUES
-plotCIE(handles, handles.xSlider.Value, handles.ySlider.Value)
+redrawCIE(handles, handles.xSlider.Value, handles.ySlider.Value)
 
 
 
@@ -407,7 +407,7 @@ handles.ySlider.Value = round(str2double(handles.yValue.String), 2);
 
 % THIS NEEDS TO EVENTUALLY INCORPORATE THE NONLINEAR SOLVER TO CHANGE THE
 % RESISTANCE VALUES
-plotCIE(handles, handles.xSlider.Value, handles.ySlider.Value)
+redrawCIE(handles, handles.xSlider.Value, handles.ySlider.Value)
 
 
 
@@ -461,7 +461,7 @@ handles.yValue.String = num2str(handles.ySlider.Value);
 
 % THIS NEEDS TO EVENTUALLY INCORPORATE THE NONLINEAR SOLVER TO CHANGE THE
 % RESISTANCE VALUES
-plotCIE(handles, handles.xSlider.Value, handles.ySlider.Value)
+redrawCIE(handles, handles.xSlider.Value, handles.ySlider.Value)
 
 % --- Executes during object creation, after setting all properties.
 function ySlider_CreateFcn(hObject, eventdata, handles)
@@ -489,7 +489,7 @@ handles.xValue.String = num2str(handles.xSlider.Value);
 
 % THIS NEEDS TO EVENTUALLY INCORPORATE THE NONLINEAR SOLVER TO CHANGE THE
 % RESISTANCE VALUES
-plotCIE(handles, handles.xSlider.Value, handles.ySlider.Value)
+redrawCIE(handles, handles.xSlider.Value, handles.ySlider.Value)
 
 
 % --- Executes during object creation, after setting all properties.
