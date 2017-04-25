@@ -66,7 +66,9 @@ for iY = 1:length(Yrange)
     
     D = [Xtest; Yrange(iY) ;Ztest]; % Switches out the desired Y value
     
-    Results = lsqlin(C,D,[],[],[],[],[0;0;0;0],[.075;.06;.077;.077],[],options);
+    %[0;0;0;0] - Max resistance of inf
+    %[0.0125;0.0125;.007;.007] - max resistance of 1000
+    Results = lsqlin(C,D,[],[],[],[],[0.0125;0.0125;.007;.007],[.075;.06;.077;.077],[],options);
     
     newXYZ = C*Results;
     newx = newXYZ(1)/(sum(newXYZ));  % Put the found answers back into the eqn.
@@ -83,8 +85,8 @@ for iY = 1:length(Yrange)
         %disp(Results);
         numAnswers = numAnswers+1;
         %disp(numAnswers);
-        answers{numAnswers,1} = xtest; 
-        answers{numAnswers,2} = ytest;
+        answers{numAnswers,1} = newx; 
+        answers{numAnswers,2} = newy;
         answers{numAnswers,3} = Yrange(iY);
         answers{numAnswers,4} = Results; %Stores the succesful values of Y
     
