@@ -79,6 +79,9 @@ if alphaArray(ypos, xpos) > 0
     handles.xValue.String = round(xClick, 2);
     handles.yValue.String = round(yClick, 2);
     
+    % sets popup selector to 'Custom' in the GUI
+    handles.settingPopup.Value = 3;
+    
     redrawCIE(handles, xClick, yClick)
     
 else

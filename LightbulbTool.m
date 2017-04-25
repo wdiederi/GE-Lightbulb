@@ -452,7 +452,7 @@ function ySlider_Callback(hObject, eventdata, handles)
 %        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
 
 handles.settingPopup.Value = 3;
-handles.yValue.String = round(num2str(handles.ySlider.Value), 2);
+handles.yValue.String = num2str(round(handles.ySlider.Value, 2));
 redrawCIE(handles, handles.xSlider.Value, handles.ySlider.Value)
 
 % --- Executes during object creation, after setting all properties.
@@ -477,7 +477,7 @@ function xSlider_Callback(hObject, eventdata, handles)
 %        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
 
 handles.settingPopup.Value = 3;
-handles.xValue.String = round(num2str(handles.xSlider.Value), 2);
+handles.xValue.String = num2str(round(handles.xSlider.Value, 2));
 redrawCIE(handles, handles.xSlider.Value, handles.ySlider.Value)
 
 

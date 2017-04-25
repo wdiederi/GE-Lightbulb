@@ -94,8 +94,6 @@ handles.YValue.String = num2str(Y);
 
 %% Plot
 
-plotCIE(handles, x, y);
+redrawCIE(handles, x, y);
 
-%% Plot
-plotCIE(handles, x, y)
 end

@@ -37,9 +37,6 @@ disp(['CIE(ypos, xpos, :): ', num2str(CIE(ypos, xpos, :))])
 % checks if the position is valid
 if alphaArray(ypos, xpos) > 0   % this is possibly faulty
     
-    % sets popup selector to 'Custom' in the GUI
-    handles.settingPopup.Value = 3;
-    
     % update the plot to redraw the locator circle
     delete(hDot)    % first, delete the old circle
     hDot = plot(handles.axesCIE, x, y, 'ko', 'LineWidth', 1.5);   % next, redraw the circle
@@ -52,8 +49,6 @@ if alphaArray(ypos, xpos) > 0   % this is possibly faulty
     % shows image with various options
     imshow(CIE(ypos, xpos, :), 'InitialMagnification', 'fit', 'Parent', handles.axesColor);
     axis(handles.axesColor, 'off')  % turns off the axes for this graph
-    
-    % HERE, ADD FUNCTIONALITY WITH THE NONLINEAR SOLVER
     
 else
     
