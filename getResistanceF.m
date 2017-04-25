@@ -1,4 +1,4 @@
-function getResistanceF(handles, xtest, ytest, Ytest)
+function getResistanceF(handles)
 %Last Modified 4/24
 % Takes the x, y, Y values and outputs the needed current values. to get as
 % close as possible to the Y value after getting the x, and y.
@@ -8,17 +8,11 @@ function getResistanceF(handles, xtest, ytest, Ytest)
 %
 
 %% Accept multiple input types
-if nargin<4 % less than 4 if using from gui
-    Ytest = 3;
-end
 
-%{
-Define values of handles =
-  = xtest;
-  = ytest;
-  = Ytest;
-
-%}
+%Define values of handles
+xtest = handles.xSlider.Value;
+ytest = handles.ySlider.Value;
+Ytest = 3;
 
 %% AM
 %{
@@ -53,7 +47,7 @@ C = [Xval; Yval; Zval]; % Used in later calculations
 options.Algorithm = 'interior-point';
 options.Display = 'none';  % Used with the linear solver
 
-wh = waitbar(0,'Percentage of Y values tested');
+wh = waitbar(0,'Calculating Resistances...');
 Yrange = 0:.001:Ytest;
 numAnswers =0;
 for iY = 1:length(Yrange)
@@ -159,11 +153,49 @@ LEDans{2}.resistance = LEDans{2}.resistance -100;
 LEDans{3}.resistance = LEDans{3}.resistance -100;
 LEDans{4}.resistance = LEDans{4}.resistance -100;
 
-
+%{
 for iLED = 1:4
     
     disp(['Resistance that should be supplied to LED:',LEDans{iLED}.color,' is ',...
        num2str( LEDans{iLED}.resistance ), ' ohms.' ]);
 end
+%}
 
+%% Change gui resistance values
 
+% change text box Strings
+handles.redText.String = num2str(round(LEDans{1}.resistance, 2));
+handles.greenText.String = num2str(round(LEDans{2}.resistance, 2));
+handles.blueText.String = num2str(round(LEDans{3}.resistance, 2));
+handles.whiteText.String = num2str(round(LEDans{4}.resistance, 2));
+
+% change redSlider
+if LEDans{1}.resistance <= 1000
+    handles.redSlider.Value = LEDans{1}.resistance;
+else
+    handles.redSlider.Value = 1000;
+end
+
+% change greenSlider
+if LEDans{2}.resistance <= 1000
+    handles.greenSlider.Value = LEDans{2}.resistance;
+else
+    handles.greenSlider.Value = 1000;
+end
+
+% change blueSlider
+if LEDans{3}.resistance <= 1000
+    handles.blueSlider.Value = LEDans{3}.resistance;
+else
+    handles.blueSlider.Value = 1000;
+end
+
+% change whiteSlider
+if LEDans{4}.resistance <= 1000
+    handles.whiteSlider.Value = LEDans{4}.resistance;
+else
+    handles.whiteSlider.Value = 1000;
+end
+
+% display Y value
+handles.YVale.String = num2str(round(Ycorrect, 3));

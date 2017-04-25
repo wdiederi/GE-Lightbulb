@@ -247,7 +247,8 @@ function buttonCalculate_Callback(hObject, eventdata, handles)
 % hObject    handle to buttonCalculate (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-getXYZvalF(handles);
+
+getResistanceF(handles);
 
 % --- Executes on button press in checkbox1.
 function checkbox1_Callback(hObject, eventdata, handles)
@@ -268,7 +269,7 @@ function redText_Callback(hObject, eventdata, handles)
 %        str2double(get(hObject,'String')) returns contents of redText as a double
 handles.settingPopup.Value = 3;
 resRstr = handles.redText.String;
-handles.redSlider.Value = round(str2double(resRstr), 2);
+handles.redSlider.Value = resRstr;
 getXYZvalF(handles);
 
 
@@ -295,7 +296,7 @@ function greenText_Callback(hObject, eventdata, handles)
 %        str2double(get(hObject,'String')) returns contents of greenText as a double
 handles.settingPopup.Value = 3;
 resGstr = handles.greenText.String;
-handles.greenSlider.Value = round(str2double(resGstr), 2);
+handles.greenSlider.Value = resGstr;
 getXYZvalF(handles);
 
 % --- Executes during object creation, after setting all properties.
@@ -321,7 +322,7 @@ function whiteText_Callback(hObject, eventdata, handles)
 %        str2double(get(hObject,'String')) returns contents of whiteText as a double
 handles.settingPopup.Value = 3;
 resWstr = handles.whiteText.String;
-handles.whiteSlider.Value = round(str2double(resWstr), 2);
+handles.whiteSlider.Value = resWstr;
 getXYZvalF(handles);
 
 % --- Executes during object creation, after setting all properties.
@@ -347,7 +348,7 @@ function blueText_Callback(hObject, eventdata, handles)
 %        str2double(get(hObject,'String')) returns contents of blueText as a double
 handles.settingPopup.Value = 3;
 resBstr = handles.blueText.String;
-handles.blueSlider.Value = round(str2double(resBstr), 2);
+handles.blueSlider.Value = resBstr;
 getXYZvalF(handles);
 
 % --- Executes during object creation, after setting all properties.
@@ -373,10 +374,7 @@ function xValue_Callback(hObject, eventdata, handles)
 %        str2double(get(hObject,'String')) returns contents of xValue as a double
 
 handles.settingPopup.Value = 3;
-handles.xSlider.Value = round(str2double(handles.xValue.String), 2);
-
-% THIS NEEDS TO EVENTUALLY INCORPORATE THE NONLINEAR SOLVER TO CHANGE THE
-% RESISTANCE VALUES
+handles.xSlider.Value = handles.xValue.String;
 redrawCIE(handles, handles.xSlider.Value, handles.ySlider.Value)
 
 
@@ -403,10 +401,7 @@ function yValue_Callback(hObject, eventdata, handles)
 %        str2double(get(hObject,'String')) returns contents of yValue as a double
 
 handles.settingPopup.Value = 3;
-handles.ySlider.Value = round(str2double(handles.yValue.String), 2);
-
-% THIS NEEDS TO EVENTUALLY INCORPORATE THE NONLINEAR SOLVER TO CHANGE THE
-% RESISTANCE VALUES
+handles.ySlider.Value = handles.yValue.String;
 redrawCIE(handles, handles.xSlider.Value, handles.ySlider.Value)
 
 
@@ -457,10 +452,7 @@ function ySlider_Callback(hObject, eventdata, handles)
 %        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
 
 handles.settingPopup.Value = 3;
-handles.yValue.String = num2str(handles.ySlider.Value);
-
-% THIS NEEDS TO EVENTUALLY INCORPORATE THE NONLINEAR SOLVER TO CHANGE THE
-% RESISTANCE VALUES
+handles.yValue.String = round(num2str(handles.ySlider.Value), 2);
 redrawCIE(handles, handles.xSlider.Value, handles.ySlider.Value)
 
 % --- Executes during object creation, after setting all properties.
@@ -485,10 +477,7 @@ function xSlider_Callback(hObject, eventdata, handles)
 %        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
 
 handles.settingPopup.Value = 3;
-handles.xValue.String = num2str(handles.xSlider.Value);
-
-% THIS NEEDS TO EVENTUALLY INCORPORATE THE NONLINEAR SOLVER TO CHANGE THE
-% RESISTANCE VALUES
+handles.xValue.String = round(num2str(handles.xSlider.Value), 2);
 redrawCIE(handles, handles.xSlider.Value, handles.ySlider.Value)
 
 
