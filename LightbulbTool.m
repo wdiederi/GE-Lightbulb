@@ -374,7 +374,7 @@ function xValue_Callback(hObject, eventdata, handles)
 %        str2double(get(hObject,'String')) returns contents of xValue as a double
 
 handles.settingPopup.Value = 3;
-handles.xSlider.Value = handles.xValue.String;
+handles.xSlider.Value = str2double(handles.xValue.String);
 redrawCIE(handles, handles.xSlider.Value, handles.ySlider.Value)
 
 
@@ -401,7 +401,7 @@ function yValue_Callback(hObject, eventdata, handles)
 %        str2double(get(hObject,'String')) returns contents of yValue as a double
 
 handles.settingPopup.Value = 3;
-handles.ySlider.Value = handles.yValue.String;
+handles.ySlider.Value = str2double(handles.yValue.String);
 redrawCIE(handles, handles.xSlider.Value, handles.ySlider.Value)
 
 

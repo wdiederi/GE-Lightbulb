@@ -90,6 +90,12 @@ for iY = 1:length(Yrange)
 end
 close(wh);
 
+if numAnswers == 0
+    hmessage = msgbox('Resistance values could not be found for this color','Error','error');
+    
+    return
+end
+
 AnswersYvalues = cell2mat(answers(:,3));
 %Answers(3) has the valid values of Y
 AnswerError = abs( AnswersYvalues -Ytest);  % converts the array into one that just continues the difference
@@ -198,4 +204,4 @@ else
 end
 
 % display Y value
-handles.YVale.String = num2str(round(Ycorrect, 3));
+handles.YValue.String = num2str(round(Ycorrect, 3));
