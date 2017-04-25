@@ -54,7 +54,7 @@ options.Algorithm = 'interior-point';
 options.Display = 'none';  % Used with the linear solver
 
 wh = waitbar(0,'Percentage of Y values tested');
-Yrange = 0:.0001:Ytest;
+Yrange = 0:.001:Ytest;
 numAnswers =0;
 for iY = 1:length(Yrange)
     waitbar(iY/length(Yrange),wh);
@@ -68,7 +68,7 @@ for iY = 1:length(Yrange)
     
     %[0;0;0;0] - Max resistance of inf
     %[0.0125;0.0125;.007;.007] - max resistance of 1000
-    Results = lsqlin(C,D,[],[],[],[],[0.0125;0.0125;.007;.007],[.075;.06;.077;.077],[],options);
+    Results = lsqlin(C,D,[],[],[],[],[0;0;0;0],[.075;.06;.077;.077],[],options);
     
     newXYZ = C*Results;
     newx = newXYZ(1)/(sum(newXYZ));  % Put the found answers back into the eqn.
