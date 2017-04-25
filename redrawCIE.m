@@ -51,6 +51,7 @@ if alphaArray(ypos, xpos) > 0   % this is possibly faulty
     
     % shows image with various options
     imshow(CIE(ypos, xpos, :), 'InitialMagnification', 'fit', 'Parent', handles.axesColor);
+    axis(handles.axesColor, 'off')  % turns off the axes for this graph
     
     % HERE, ADD FUNCTIONALITY WITH THE NONLINEAR SOLVER
     

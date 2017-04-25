@@ -23,7 +23,7 @@ hax = handles.axesCIE;      % saves handles of current axes
 
 % shows image with various options
 CIE_image = imshow(CIE, 'InitialMagnification', 'fit', 'Parent', hax, 'XData', [0, .735], 'YData', [.835, 0]);
-iptsetpref('ImshowAxesVisible', 'off')   % shows the coordinates like any normal axes
+axis(handles.axesCIE, 'on')  % turns on the axes for this graph
 set(hax, 'Ydir', 'Normal')              % resets the orientation of the Y axis can be 'reverse' or 'Normal'
 alpha(hax, alphaArray)   % this selects the portion of the image to keep transparent (invisible)
 hold on
