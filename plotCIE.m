@@ -22,7 +22,7 @@ axes(handles.axesCIE)
 hax = handles.axesCIE;      % saves handles of current axes
 
 % shows image with various options
-CIE_image = imshow(CIE, 'InitialMagnification', 'fit', 'Parent', hax, 'XData', [0, .74], 'YData', [.835, 0]);
+CIE_image = imshow(CIE, 'InitialMagnification', 'fit', 'Parent', hax, 'XData', [0, .735], 'YData', [.835, 0]);
 iptsetpref('ImshowAxesVisible', 'off')   % shows the coordinates like any normal axes
 set(hax, 'Ydir', 'Normal')              % resets the orientation of the Y axis can be 'reverse' or 'Normal'
 alpha(hax, alphaArray)   % this selects the portion of the image to keep transparent (invisible)
@@ -66,7 +66,7 @@ yClick = clickPoint(1, 2);  % y coordinate of the mouse click
 
 % SOMETHING HERE NEEDS TO BE FIXED
 % finds the x and y positions of the click relative to the image
-xpos = round((xClick / .74) * 1014);
+xpos = round((xClick / .735) * 1014);
 ypos = round((1 - yClick / .835) * 894);
 
 
