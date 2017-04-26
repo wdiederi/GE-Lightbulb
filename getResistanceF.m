@@ -178,7 +178,7 @@ hmessage = msgbox({'Resistance values found!',...
 
 % make visual modifications to message box
 hmessage.CurrentAxes.Children.FontSize = 16;
-hmessage.Position = [1000 500 300 150];
+hmessage.Position = [500 250 300 150];
 
 %% Change gui resistance values
 

@@ -17,8 +17,8 @@ hDot = handles.axesCIE.UserData.hDot;
 xpos = round((x / .735) * size(CIE, 2));
 ypos = round((1 - y / .835) * size(CIE, 1));
 
-%{
 % test display
+clc
 disp(' ')
 disp('~ INFO ~')
 disp(['x/width: ', num2str((x / .74))])
@@ -29,13 +29,13 @@ disp(['xpos: ', num2str(xpos)])
 disp(['ypos: ', num2str(ypos)])
 disp(['size(CIE): ', num2str(size(CIE))])
 disp(['CIE(ypos, xpos, :): ', num2str(CIE(ypos, xpos, :))])
-%}
+
 
 
 %% Redraw Plots 
 
 % checks if the position is valid
-if alphaArray(ypos, xpos) > 0   % this is possibly faulty
+if CIE(ypos, xpos, 1) > 0 || CIE(ypos, xpos, 2) > 0 || CIE(ypos, xpos, 3) > 0  % this must be faulty
     
     % update the plot to redraw the locator circle
     delete(hDot)    % first, delete the old circle
@@ -49,6 +49,12 @@ if alphaArray(ypos, xpos) > 0   % this is possibly faulty
     % shows image with various options
     imshow(CIE(ypos, xpos, :), 'InitialMagnification', 'fit', 'Parent', handles.axesColor);
     axis(handles.axesColor, 'off')  % turns off the axes for this graph
+    
+    % update x and y sliders on GUI
+    handles.xSlider = x;
+    handles.ySlider = y;
+    handles.xValue = num2str(round(x, 2));
+    handles.yValue = num2str(round(y, 2));
     
 else
     

@@ -71,7 +71,7 @@ ypos = round((1 - yClick / .835) * 894);
 
 
 % checks if the position is valid
-if alphaArray(ypos, xpos) > 0
+if CIE(ypos, xpos, 1) > 0 || CIE(ypos, xpos, 2) > 0 || CIE(ypos, xpos, 3) > 0
     
     % changes x and y sliders and text in the GUI
     handles.xSlider.Value = round(xClick, 2);
