@@ -72,7 +72,7 @@ for iY = 1:length(Yrange)
     
     % Test to see if the result is relatively close
     
-    if abs(xtest-newx) <.0001 && abs(ytest-newy) <.0001
+    if abs(xtest-newx) <.01 && abs(ytest-newy) <.01
         %.0001 is the limit for how close it should be.
         
         %disp([ 'x= ', num2str(newx), '; y= ', num2str(newy),'; Y= ', num2str(Y(iY)) ]);
@@ -166,6 +166,15 @@ for iLED = 1:4
        num2str( LEDans{iLED}.resistance ), ' ohms.' ]);
 end
 %}
+
+%% Display resistances in pop-up box
+
+hmessage = msgbox({'Resistance values found!',...
+    ['Red Resistance: ',num2str(round(LEDans{1}.resistance, 2)), ' Ohms.'],...
+    ['Blue Resistance: ',num2str(round(LEDans{2}.resistance, 2)), ' Ohms.'],...
+    ['Green Resistance: ',num2str(round(LEDans{3}.resistance, 2)), ' Ohms.'],...
+    ['White Resistance: ',num2str(round(LEDans{4}.resistance, 2)), ' Ohms.']},...
+    'Resistances');
 
 %% Change gui resistance values
 
