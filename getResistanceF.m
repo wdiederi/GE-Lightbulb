@@ -12,6 +12,7 @@ function getResistanceF(handles)
 %Define values of handles
 xtest = handles.xSlider.Value;
 ytest = handles.ySlider.Value;
+
 Ytest = 3;
 
 %% AM
@@ -61,8 +62,10 @@ for iY = 1:length(Yrange)
     D = [Xtest; Yrange(iY) ;Ztest]; % Switches out the desired Y value
     
     %[0;0;0;0] - Max resistance of inf
-    %[0.0125;0.0125;.007;.007] - max resistance of 1000
-    Results = lsqlin(C,D,[],[],[],[],[0;0;0;0],[.075;.06;.077;.077],[],options);
+    %[0.0125;0.006;.007;.007] - max resistance of 1000
+    
+    % Within 10,000 ohms
+    Results = lsqlin(C,D,[],[],[],[],[0.00312;0.0015;.0018;.0018],[.075;.06;.077;.077],[],options);
     
     newXYZ = C*Results;
     newx = newXYZ(1)/(sum(newXYZ));  % Put the found answers back into the eqn.
@@ -104,6 +107,7 @@ for it = 1: length(AnswersYvalues)
         itCorrect = it;
     end
 end
+%itCorrect = 75;
 %disp(['The closest Y value is ', num2str(Y(itCorrect))]);
 
 xcorrect = answers{itCorrect,1};
@@ -171,8 +175,8 @@ end
 
 hmessage = msgbox({'Resistance values found!',...
     ['Red Resistance: ',num2str(round(LEDans{1}.resistance, 2)), ' Ohms.'],...
-    ['Blue Resistance: ',num2str(round(LEDans{2}.resistance, 2)), ' Ohms.'],...
-    ['Green Resistance: ',num2str(round(LEDans{3}.resistance, 2)), ' Ohms.'],...
+    ['Green Resistance: ',num2str(round(LEDans{2}.resistance, 2)), ' Ohms.'],...
+    ['Blue Resistance: ',num2str(round(LEDans{3}.resistance, 2)), ' Ohms.'],...
     ['White Resistance: ',num2str(round(LEDans{4}.resistance, 2)), ' Ohms.']},...
     'Resistances');
 

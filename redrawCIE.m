@@ -12,30 +12,15 @@ hDot = handles.axesCIE.UserData.hDot;
 
 %% Make Calculations
 
-% THIS MAY BE FAULTY
 % finds the x and y positions relative to the array size
 xpos = round((x / .735) * size(CIE, 2));
 ypos = round((1 - y / .835) * size(CIE, 1));
 
-% test display
-clc
-disp(' ')
-disp('~ INFO ~')
-disp(['x/width: ', num2str((x / .74))])
-disp(['y/height: ', num2str((y / .835))])
-disp(['x: ', num2str(x)])
-disp(['y: ', num2str(y)])
-disp(['xpos: ', num2str(xpos)])
-disp(['ypos: ', num2str(ypos)])
-disp(['size(CIE): ', num2str(size(CIE))])
-disp(['CIE(ypos, xpos, :): ', num2str(CIE(ypos, xpos, :))])
-
-%
 
 %% Redraw Plots 
 
 % checks if the position is valid
-if CIE(ypos, xpos, 1) > 0 || CIE(ypos, xpos, 2) > 0 || CIE(ypos, xpos, 3) > 0  % this must be faulty
+if alphaArray(ypos, xpos) > 0
     
     % update the plot to redraw the locator circle
     delete(hDot)    % first, delete the old circle
@@ -58,6 +43,6 @@ if CIE(ypos, xpos, 1) > 0 || CIE(ypos, xpos, 2) > 0 || CIE(ypos, xpos, 3) > 0  %
     
 else
     
-    disp('Invalid Location')
+    msgbox('Invalid Location','Error','error')
     
 end
