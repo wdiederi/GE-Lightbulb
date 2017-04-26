@@ -30,7 +30,7 @@ disp(['ypos: ', num2str(ypos)])
 disp(['size(CIE): ', num2str(size(CIE))])
 disp(['CIE(ypos, xpos, :): ', num2str(CIE(ypos, xpos, :))])
 
-
+%
 
 %% Redraw Plots 
 
