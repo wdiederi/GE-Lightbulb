@@ -176,6 +176,10 @@ hmessage = msgbox({'Resistance values found!',...
     ['White Resistance: ',num2str(round(LEDans{4}.resistance, 2)), ' Ohms.']},...
     'Resistances');
 
+% make visual modifications to message box
+hmessage.CurrentAxes.Children.FontSize = 16;
+hmessage.Position = [1000 500 300 150];
+
 %% Change gui resistance values
 
 % change text box Strings
