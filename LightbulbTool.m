@@ -33,7 +33,7 @@ function varargout = LightbulbTool(varargin)
 
 % Edit the above text to modify the response to help LightbulbTool
 
-% Last Modified by GUIDE v2.5 18-Apr-2017 18:51:43
+% Last Modified by GUIDE v2.5 25-Apr-2017 20:21:53
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -250,15 +250,6 @@ function buttonCalculate_Callback(hObject, eventdata, handles)
 
 getResistanceF(handles);
 
-% --- Executes on button press in checkbox1.
-function checkbox1_Callback(hObject, eventdata, handles)
-% hObject    handle to checkbox1 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hint: get(hObject,'Value') returns toggle state of checkbox1
-getXYZvalF(handles);
-
 
 function redText_Callback(hObject, eventdata, handles)
 % hObject    handle to redText (see GCBO)
@@ -409,29 +400,6 @@ redrawCIE(handles, handles.xSlider.Value, handles.ySlider.Value)
 % --- Executes during object creation, after setting all properties.
 function yValue_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to yValue (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end
-
-
-
-function edit8_Callback(hObject, eventdata, handles)
-% hObject    handle to edit8 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'String') returns contents of edit8 as text
-%        str2double(get(hObject,'String')) returns contents of edit8 as a double
-
-
-% --- Executes during object creation, after setting all properties.
-function edit8_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit8 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
