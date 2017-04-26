@@ -33,7 +33,7 @@ function varargout = LightbulbTool(varargin)
 
 % Edit the above text to modify the response to help LightbulbTool
 
-% Last Modified by GUIDE v2.5 25-Apr-2017 20:21:53
+% Last Modified by GUIDE v2.5 26-Apr-2017 01:51:13
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -72,8 +72,71 @@ guidata(hObject, handles);
 % UIWAIT makes LightbulbTool wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
 
-
+% execute initial function
 GElightbulbF(handles);
+
+
+%% SAVE AM color data to GUI elements
+% update x and y sliders and text boxes
+handles.xValue.String = '0.31';
+handles.yValue.String = '0.30';
+handles.xSlider.Value = .313;
+handles.ySlider.Value = .298;
+handles.YValue.String = '1.318';
+
+% update color text boxes
+handles.redText.String = '302.47';
+handles.greenText.String = '0.13';
+handles.blueText.String = '190.92';
+handles.whiteText.String = '0.35';
+
+% update color sliders
+handles.redSlider.Value = 302.47;
+handles.greenSlider.Value = 0.13;
+handles.blueSlider.Value = 190.92;
+handles.whiteSlider.Value = 0.35;
+
+
+%% SAVE AM color data to Listbox UserData
+% update x and y sliders and text boxes
+handles.saveColorListbox.UserData.xValue{1} = handles.xValue.String;
+handles.saveColorListbox.UserData.yValue{1} = handles.yValue.String;
+handles.saveColorListbox.UserData.xSlider{1} = handles.xSlider.Value;
+handles.saveColorListbox.UserData.ySlider{1} = handles.ySlider.Value;
+handles.saveColorListbox.UserData.YValue{1} = handles.YValue.String;
+
+% update color text boxes
+handles.saveColorListbox.UserData.redText{1} = handles.redText.String;
+handles.saveColorListbox.UserData.greenText{1} = handles.greenText.String;
+handles.saveColorListbox.UserData.blueText{1} = handles.blueText.String;
+handles.saveColorListbox.UserData.whiteText{1} = handles.whiteText.String;
+
+% update color sliders
+handles.saveColorListbox.UserData.redSlider{1} = handles.redSlider.Value;
+handles.saveColorListbox.UserData.greenSlider{1} = handles.greenSlider.Value;
+handles.saveColorListbox.UserData.blueSlider{1} = handles.blueSlider.Value;
+handles.saveColorListbox.UserData.whiteSlider{1} = handles.whiteSlider.Value;
+
+
+%% SAVE PM color data to Listbox UserData
+% update x and y sliders and text boxes
+handles.saveColorListbox.UserData.xValue{2} = '0.52';
+handles.saveColorListbox.UserData.yValue{2} = '0.41';
+handles.saveColorListbox.UserData.xSlider{2} = .521;
+handles.saveColorListbox.UserData.ySlider{2} = .413;
+handles.saveColorListbox.UserData.YValue{2} = '0.512';
+
+% update color text boxes
+handles.saveColorListbox.UserData.redText{2} = '0.36';
+handles.saveColorListbox.UserData.greenText{2} = '8.68';
+handles.saveColorListbox.UserData.blueText{2} = '1406357.53';
+handles.saveColorListbox.UserData.whiteText{2} = '426.45';
+
+% update color sliders
+handles.saveColorListbox.UserData.redSlider{2} = 0.36;
+handles.saveColorListbox.UserData.greenSlider{2} = 8.68;
+handles.saveColorListbox.UserData.blueSlider{2} = 1000;
+handles.saveColorListbox.UserData.whiteSlider{2} = 426.45;
 
 
 % --- Outputs from this function are returned to the command line.
@@ -459,3 +522,142 @@ function xSlider_CreateFcn(hObject, eventdata, handles)
 if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor',[.9 .9 .9]);
 end
+
+
+% --- Executes on selection change in saveColorListbox.
+function saveColorListbox_Callback(hObject, eventdata, handles)
+% hObject    handle to saveColorListbox (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: contents = cellstr(get(hObject,'String')) returns saveColorListbox contents as cell array
+%        contents{get(hObject,'Value')} returns selected item from saveColorListbox
+
+% gather data and abbreviated references
+pos = handles.saveColorListbox.Value;
+data = handles.saveColorListbox.UserData;
+
+% update x and y sliders and text boxes
+handles.xValue.String = data.xValue{pos};
+handles.yValue.String = data.yValue{pos};
+handles.xSlider.Value = data.xSlider{pos};
+handles.ySlider.Value = data.ySlider{pos};
+handles.YValue.String = data.YValue{pos};
+
+% update color text boxes
+handles.redText.String = data.redText{pos};
+handles.greenText.String = data.greenText{pos};
+handles.blueText.String = data.blueText{pos};
+handles.whiteText.String = data.whiteText{pos};
+
+% update color sliders
+handles.redSlider.Value = data.redSlider{pos};
+handles.greenSlider.Value = data.greenSlider{pos};
+handles.blueSlider.Value = data.blueSlider{pos};
+handles.whiteSlider.Value = data.whiteSlider{pos};
+
+% update plots
+redrawCIE(handles, handles.xSlider.Value, handles.ySlider.Value)
+
+% --- Executes during object creation, after setting all properties.
+function saveColorListbox_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to saveColorListbox (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: listbox controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function saveColorText_Callback(hObject, eventdata, handles)
+% hObject    handle to saveColorText (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of saveColorText as text
+%        str2double(get(hObject,'String')) returns contents of saveColorText as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function saveColorText_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to saveColorText (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes on button press in saveColorButton.
+function saveColorButton_Callback(hObject, eventdata, handles)
+% hObject    handle to saveColorButton (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% add color name to String of Listbox
+pos = size(handles.saveColorListbox.String, 1) + 1;
+handles.saveColorListbox.String{pos} = handles.saveColorText.String;
+
+% SAVE color data to UserData
+% update x and y sliders and text boxes
+handles.saveColorListbox.UserData.xValue{pos} = handles.xValue.String;
+handles.saveColorListbox.UserData.yValue{pos} = handles.yValue.String;
+handles.saveColorListbox.UserData.xSlider{pos} = handles.xSlider.Value;
+handles.saveColorListbox.UserData.ySlider{pos} = handles.ySlider.Value;
+handles.saveColorListbox.UserData.YValue{pos} = handles.YValue.String;
+
+% update color text boxes
+handles.saveColorListbox.UserData.redText{pos} = handles.redText.String;
+handles.saveColorListbox.UserData.greenText{pos} = handles.greenText.String;
+handles.saveColorListbox.UserData.blueText{pos} = handles.blueText.String;
+handles.saveColorListbox.UserData.whiteText{pos} = handles.whiteText.String;
+
+% update color sliders
+handles.saveColorListbox.UserData.redSlider{pos} = handles.redSlider.Value;
+handles.saveColorListbox.UserData.greenSlider{pos} = handles.greenSlider.Value;
+handles.saveColorListbox.UserData.blueSlider{pos} = handles.blueSlider.Value;
+handles.saveColorListbox.UserData.whiteSlider{pos} = handles.whiteSlider.Value;
+
+% --- Executes on button press in deleteColorButton.
+function deleteColorButton_Callback(hObject, eventdata, handles)
+% hObject    handle to deleteColorButton (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% read data
+%newString = handles.saveColorListbox.String;
+pos = handles.saveColorListbox.Value;
+
+% changes position of Listbox to prevent an out-of-bounds error
+if handles.saveColorListbox.Value > 1
+    handles.saveColorListbox.Value = handles.saveColorListbox.Value - 1;
+end
+
+% change list view
+handles.saveColorListbox.String(pos) = [];
+
+% change x and y sliders and text boxes
+handles.saveColorListbox.UserData.xValue(pos) = [];
+handles.saveColorListbox.UserData.yValue(pos) = [];
+handles.saveColorListbox.UserData.xSlider(pos) = [];
+handles.saveColorListbox.UserData.ySlider(pos) = [];
+handles.saveColorListbox.UserData.YValue(pos) = [];
+
+% change color text boxes
+handles.saveColorListbox.UserData.redText(pos) = [];
+handles.saveColorListbox.UserData.greenText(pos) = [];
+handles.saveColorListbox.UserData.blueText(pos) = [];
+handles.saveColorListbox.UserData.whiteText(pos) = [];
+
+% change color sliders
+handles.saveColorListbox.UserData.redSlider(pos) = [];
+handles.saveColorListbox.UserData.greenSlider(pos) = [];
+handles.saveColorListbox.UserData.blueSlider(pos) = [];
+handles.saveColorListbox.UserData.whiteSlider(pos) = [];
