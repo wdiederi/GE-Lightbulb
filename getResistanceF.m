@@ -10,10 +10,9 @@ function getResistanceF(handles)
 %% Accept multiple input types
 
 %Define values of handles
-%xtest = handles.xSlider.Value;
-%ytest = handles.ySlider.Value;
-xtest = .521;
-ytest = .413;
+xtest = handles.xSlider.Value;
+ytest = handles.ySlider.Value;
+
 Ytest = 3;
 
 %% AM
