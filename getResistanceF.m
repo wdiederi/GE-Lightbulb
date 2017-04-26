@@ -70,12 +70,12 @@ for iY = 1:length(Yrange)
     newXYZ = C*Results;
     newx = newXYZ(1)/(sum(newXYZ));  % Put the found answers back into the eqn.
     newy = newXYZ(2)/(sum(newXYZ));  % Then convert the XYZ into xyY
-    
+    newY = newXYZ(2);
     
     
     % Test to see if the result is relatively close
     
-    if abs(xtest-newx) <.01 && abs(ytest-newy) <.01
+    if abs(xtest-newx) <.001 && abs(ytest-newy) <.001
         %.0001 is the limit for how close it should be.
         
         %disp([ 'x= ', num2str(newx), '; y= ', num2str(newy),'; Y= ', num2str(Y(iY)) ]);
@@ -84,7 +84,7 @@ for iY = 1:length(Yrange)
         %disp(numAnswers);
         answers{numAnswers,1} = newx; 
         answers{numAnswers,2} = newy;
-        answers{numAnswers,3} = Yrange(iY);
+        answers{numAnswers,3} = newY;
         answers{numAnswers,4} = Results; %Stores the succesful values of Y
     
     end
