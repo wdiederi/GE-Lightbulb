@@ -200,14 +200,14 @@ switch handles.settingPopup.Value
     
     case 1 % AM SETTING
         % values on resistor, not total resistance
-        handles.redSlider.Value = 46.8667;
-        handles.greenSlider.Value = 9.9533;
-        handles.blueSlider.Value = 36.5713;
-        handles.whiteSlider.Value = 23.724;
-        handles.redText.String = 46.86;
-        handles.greenText.String = 9.95;
-        handles.blueText.String = 36.57;
-        handles.whiteText.String = 23.72;
+        handles.redSlider.Value = 202.74;
+        handles.greenSlider.Value = 0;
+        handles.blueSlider.Value = 163.41;
+        handles.whiteSlider.Value = 0.19;
+        handles.redText.String = 202.74;
+        handles.greenText.String = 0;
+        handles.blueText.String = 163.41;
+        handles.whiteText.String = 0.19;
         % WE NEED TO UPDATE THE GRAPH AS WELL
         
         
