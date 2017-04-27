@@ -98,9 +98,9 @@ redrawCIE(handles, x, y);
 
 %% Show Current Values in GUI
 
-handles.redCurrentText.String = round(LED{1}.current, 4);
-handles.greenCurrentText.String = round(LED{2}.current, 4);
-handles.blueCurrentText.String = round(LED{3}.current, 4);
-handles.whiteCurrentText.String = round(LED{4}.current, 4);
+handles.redCurrentText.String = round(1000* LED{1}.current, 1);
+handles.greenCurrentText.String = round(1000*LED{2}.current, 1);
+handles.blueCurrentText.String = round(1000*LED{3}.current, 1);
+handles.whiteCurrentText.String = round(1000*LED{4}.current, 1);
 
 end
