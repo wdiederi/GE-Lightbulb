@@ -96,4 +96,11 @@ handles.YValue.String = num2str(round(Y, 3));
 
 redrawCIE(handles, x, y);
 
+%% Show Current Values in GUI
+
+handles.redCurrentText.String = round(LED{1}.current, 4);
+handles.greenCurrentText.String = round(LED{2}.current, 4);
+handles.blueCurrentText.String = round(LED{3}.current, 4);
+handles.whiteCurrentText.String = round(LED{4}.current, 4);
+
 end
