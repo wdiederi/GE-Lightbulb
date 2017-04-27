@@ -33,7 +33,7 @@ function varargout = LightbulbTool(varargin)
 
 % Edit the above text to modify the response to help LightbulbTool
 
-% Last Modified by GUIDE v2.5 26-Apr-2017 01:51:13
+% Last Modified by GUIDE v2.5 26-Apr-2017 22:38:39
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -75,6 +75,7 @@ guidata(hObject, handles);
 % execute initial function
 GElightbulbF(handles);
 
+handles.capResistanceButton.Value = 1;
 
 %% SAVE AM color data to GUI elements
 % update x and y sliders and text boxes
@@ -95,6 +96,12 @@ handles.redSlider.Value = 302.47;
 handles.greenSlider.Value = 0.13;
 handles.blueSlider.Value = 190.92;
 handles.whiteSlider.Value = 0.35;
+
+% update current text boxes
+handles.redCurrentText.String = '20.9';
+handles.greenCurrentText.String = '42';
+handles.blueCurrentText.String = '18.6';
+handles.whiteCurrentText.String = '53.8';
 
 
 %% SAVE AM color data to Listbox UserData
@@ -117,6 +124,12 @@ handles.saveColorListbox.UserData.greenSlider{1} = handles.greenSlider.Value;
 handles.saveColorListbox.UserData.blueSlider{1} = handles.blueSlider.Value;
 handles.saveColorListbox.UserData.whiteSlider{1} = handles.whiteSlider.Value;
 
+% update current text boxes
+handles.saveColorListbox.UserData.redCurrentText{1} = handles.redCurrentText.String;
+handles.saveColorListbox.UserData.greenCurrentText{1} = handles.greenCurrentText.String;
+handles.saveColorListbox.UserData.blueCurrentText{1} = handles.blueCurrentText.String;
+handles.saveColorListbox.UserData.whiteCurrentText{1} = handles.whiteCurrentText.String;
+
 
 %% SAVE PM color data to Listbox UserData
 % update x and y sliders and text boxes
@@ -137,6 +150,12 @@ handles.saveColorListbox.UserData.redSlider{2} = 0.36;
 handles.saveColorListbox.UserData.greenSlider{2} = 8.68;
 handles.saveColorListbox.UserData.blueSlider{2} = 1000;
 handles.saveColorListbox.UserData.whiteSlider{2} = 426.45;
+
+% update current text boxes
+handles.saveColorListbox.UserData.redCurrentText{2} = '52.4';
+handles.saveColorListbox.UserData.greenCurrentText{2} = '38.6';
+handles.saveColorListbox.UserData.blueCurrentText{2} = '0';
+handles.saveColorListbox.UserData.whiteCurrentText{2} = '10.3';
 
 
 % --- Outputs from this function are returned to the command line.
@@ -661,3 +680,22 @@ handles.saveColorListbox.UserData.redSlider(pos) = [];
 handles.saveColorListbox.UserData.greenSlider(pos) = [];
 handles.saveColorListbox.UserData.blueSlider(pos) = [];
 handles.saveColorListbox.UserData.whiteSlider(pos) = [];
+
+
+% --- Executes on button press in capResistanceButton.
+function capResistanceButton_Callback(hObject, eventdata, handles)
+% hObject    handle to capResistanceButton (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of capResistanceButton
+clc
+if hObject.Value == 0
+    disp(hObject.Value)
+    handles.capResistanceText.String = 'Resistance is not capped';
+    handles.capResistanceText.FontWeight = 'normal';
+elseif hObject.Value == 1
+    disp(hObject.Value)
+    handles.capResistanceText.String = 'Resistance is capped at 1000 ohms';
+    handles.capResistanceText.FontWeight = 'bold';
+end
