@@ -36,10 +36,10 @@ if alphaArray(ypos, xpos) > 0
     axis(handles.axesColor, 'off')  % turns off the axes for this graph
     
     % update x and y sliders on GUI
-    handles.xSlider = x;
-    handles.ySlider = y;
-    handles.xValue = num2str(round(x, 2));
-    handles.yValue = num2str(round(y, 2));
+    handles.xSlider.Value = x;
+    handles.ySlider.Value = y;
+    handles.xValue.String = num2str(round(x, 2));
+    handles.yValue.String = num2str(round(y, 2));
     
 else
     

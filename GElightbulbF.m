@@ -53,13 +53,13 @@ for iLED = 1:4
     
     switch iLED
         case 1
-            vLed = 13.5;
+            vLed = 11.3;
         case 2
-            vLed = 19.8;
+            vLed = 16.30;
         case 3
-            vLed = 18.6;
+            vLed = 15.63;
         case 4
-            vLed = 18.6;
+            vLed = 15.48;
         otherwise 
             vLed = 24;
     end
