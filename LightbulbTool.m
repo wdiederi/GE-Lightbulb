@@ -575,6 +575,12 @@ handles.greenSlider.Value = data.greenSlider{pos};
 handles.blueSlider.Value = data.blueSlider{pos};
 handles.whiteSlider.Value = data.whiteSlider{pos};
 
+% update current text boxes
+handles.redCurrentText.String = data.redCurrentText{pos};
+handles.greenCurrentText.String = data.greenCurrentText{pos};
+handles.blueCurrentText.String = data.blueCurrentText{pos};
+handles.whiteCurrentText.String = data.whiteCurrentText{pos};
+
 % update plots
 redrawCIE(handles, handles.xSlider.Value, handles.ySlider.Value)
 
@@ -644,6 +650,13 @@ handles.saveColorListbox.UserData.greenSlider{pos} = handles.greenSlider.Value;
 handles.saveColorListbox.UserData.blueSlider{pos} = handles.blueSlider.Value;
 handles.saveColorListbox.UserData.whiteSlider{pos} = handles.whiteSlider.Value;
 
+% update current text boxes
+handles.saveColorListbox.UserData.redCurrentText{pos} = handles.redCurrentText.String;
+handles.saveColorListbox.UserData.greenCurrentText{pos} = handles.greenCurrentText.String;
+handles.saveColorListbox.UserData.blueCurrentText{pos} = handles.blueCurrentText.String;
+handles.saveColorListbox.UserData.whiteCurrentText{pos} = handles.whiteCurrentText.String;
+
+
 % --- Executes on button press in deleteColorButton.
 function deleteColorButton_Callback(hObject, eventdata, handles)
 % hObject    handle to deleteColorButton (see GCBO)
@@ -681,6 +694,12 @@ handles.saveColorListbox.UserData.greenSlider(pos) = [];
 handles.saveColorListbox.UserData.blueSlider(pos) = [];
 handles.saveColorListbox.UserData.whiteSlider(pos) = [];
 
+% update current text boxes
+handles.saveColorListbox.UserData.redCurrentText(pos) = [];
+handles.saveColorListbox.UserData.greenCurrentText(pos) = [];
+handles.saveColorListbox.UserData.blueCurrentText(pos) = [];
+handles.saveColorListbox.UserData.whiteCurrentText(pos) = [];
+
 
 % --- Executes on button press in capResistanceButton.
 function capResistanceButton_Callback(hObject, eventdata, handles)
@@ -691,11 +710,9 @@ function capResistanceButton_Callback(hObject, eventdata, handles)
 % Hint: get(hObject,'Value') returns toggle state of capResistanceButton
 clc
 if hObject.Value == 0
-    disp(hObject.Value)
     handles.capResistanceText.String = 'Resistance is not capped';
     handles.capResistanceText.FontWeight = 'normal';
 elseif hObject.Value == 1
-    disp(hObject.Value)
     handles.capResistanceText.String = 'Resistance is capped at 1000 ohms';
     handles.capResistanceText.FontWeight = 'bold';
 end
