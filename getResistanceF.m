@@ -64,8 +64,16 @@ for iY = 1:length(Yrange)
     %[0;0;0;0] - Max resistance of inf
     %[0.0125;0.006;.007;.007] - max resistance of 1000
     
+    if handles.capResistanceButton.Value == 1
+        lowerBound = [0.0125;0.006;.007;.007];
+    else
+        lowerBound = [0;0;0;0];
+    end
+    
+    upperBound = [.075;.06;.077;.077];
+    
     % Within 10,000 ohms
-    Results = lsqlin(C,D,[],[],[],[],[0.0125;0.006;.007;.007],[.075;.06;.077;.077],[],options);
+    Results = lsqlin(C,D,[],[],[],[],lowerBound, upperBound,[],options);
     
     newXYZ = C*Results;
     newx = newXYZ(1)/(sum(newXYZ));  % Put the found answers back into the eqn.
@@ -225,7 +233,7 @@ handles.YValue.String = num2str(round(Ycorrect, 3));
 
 %% Display Current Values
 
-handles.redCurrentText.String = round(LEDans{1}.current, 4);
-handles.greenCurrentText.String = round(LEDans{2}.current, 4);
-handles.blueCurrentText.String = round(LEDans{3}.current, 4);
-handles.whiteCurrentText.String = round(LEDans{4}.current, 4);
+handles.redCurrentText.String = round(1000* LEDans{1}.current, 1);
+handles.greenCurrentText.String = round(1000*LEDans{2}.current, 1);
+handles.blueCurrentText.String = round(1000*LEDans{3}.current, 1);
+handles.whiteCurrentText.String = round(1000*LEDans{4}.current, 1);
