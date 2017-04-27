@@ -127,10 +127,6 @@ ResultsCorrect = answers{itCorrect, 4};
 disp([ 'x= ', num2str(xcorrect), '; y= ', num2str(ycorrect),'; Y= ', num2str(Ycorrect) ]);
 
 
-
-
-
-
 %% Convert the corresponding Results vector into resistance
 % the results vector houses the correct proportions of current that each
 % Led should receive
